@@ -7,7 +7,23 @@ import AppHeader from "../components/AppHeader.astro";
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
     <head>
-       <BaseHead />
+        <BaseHead />
+        <script is:inline>
+            function setTheme() {
+                try {
+                    const theme = localStorage.getItem('theme') || 
+                                 (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                    
+                    document.documentElement.classList.remove('dark', 'light');
+                    document.documentElement.classList.add(theme);
+                    localStorage.setItem('theme', theme);
+                    console.log('Theme set to:', theme); // Debug line
+                } catch (e) {
+                    console.error('Theme setting error:', e);
+                }
+            }
+            setTheme();
+        </script>
     </head>
     <body class="overflow-x-hidden bg-white dark:bg-gray-950">
         <AppHeader />

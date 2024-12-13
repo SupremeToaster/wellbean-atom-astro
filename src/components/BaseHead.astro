@@ -16,9 +16,12 @@ const { title=SITE_TITLE, description=SITE_DESCRIPTION, image = SITE_IMAGE } = A
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" media="(prefers-color-scheme: light)" />
-<link rel="icon" type="image/svg+xml" href="/darkfavicon.svg" media="(prefers-color-scheme: dark)" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
+
+<!-- Add these meta tags for theme handling -->
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
 <meta name="color-scheme" content="dark light">
 
 <!-- Canonical URL -->

@@ -8,22 +8,46 @@ import Frame from "./Frame.astro";
 const links = [
     {
         to: "/#home",
-        label: "Product",
+        label: "Home",
     },
     {
-        to: "/#features",
-        label: "Features",
+        to: "/blog",
+        label: "Blog",
     },
     {
-        to: "/#solution",
-        label: "Solution",
-    },
-    {
-        to: "/#reviews",
-        label: "Reviews",
+        to: "/about",
+        label: "About",
     },
 ];
 ---
+<script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('theme-toggle');
+        
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const element = document.documentElement;
+                const isDark = element.classList.contains('dark');
+                
+                // Toggle the dark class
+                element.classList.toggle('dark');
+                
+                // Store the new preference
+                localStorage.setItem('theme', isDark ? 'light' : 'dark');
+                
+                // Debug
+                console.log('Theme toggled. Dark mode:', !isDark);
+            });
+            
+            // Debug
+            console.log('Theme toggle button initialized');
+        } else {
+            console.error('Theme toggle button not found');
+        }
+    });
+</script>
+
 <header>
     <nav class="absolute z-50 w-full lg:bg-transparent dark:lg:bg-transparent">
         <Container>
@@ -58,6 +82,14 @@ const links = [
                         </Frame>
                     </div>
                     <div class="w-full my-6 border-t dark:border-[--ui-dark-border-color] pt-6 lg:mt-0 flex gap-2 lg:my-0 lg:border-none lg:pt-0">
+                        <button 
+                            id="theme-toggle" 
+                            aria-label="Toggle theme"
+                            class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                        >
+                            <span class="block dark:hidden" aria-hidden="true">🌙</span>
+                            <span class="hidden dark:block" aria-hidden="true">☀️</span>
+                        </button>
                         <a href="/login" class={cn(ghostButton.gray.sm, "hidden lg:flex")}>
                             Sign In
                         </a>
